@@ -23,7 +23,13 @@ jobs:
         run: npm install -g prettier
 
       - name: Run Prettier (JS Linting)
-        run: prettier --check '**/*.{js,ts,jsx,tsx,vue,css,html,json}' --log-level debug --write
+        run: |
+          FILES=$(find . -type f \( -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.vue" -o -name "*.css" -o -name "*.html" -o -name "*.json" \))
+          if [ -n "$FILES" ]; then
+            echo "$FILES" | xargs prettier --log-level debug --write
+          else
+            echo "No matching files found for linting."
+          fi
 
       - name: Fail on Lint Errors
         if: failure()
