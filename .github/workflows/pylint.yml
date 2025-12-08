@@ -3,7 +3,7 @@ name: Python Lint & Security Scan
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [develop, ValiSpect]
+    branches: [develop, main, development]
 
 jobs:
   lint:
