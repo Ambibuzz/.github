@@ -1,66 +1,106 @@
-# [App Name]
+# .github Configuration
+![Python Lint](https://github.com/Ambibuzz/.github/actions/workflows/pylint.yml/badge.svg)
+![JS Lint](https://github.com/Ambibuzz/.github/actions/workflows/jslint.yml/badge.svg)
+![Review Workflow](https://github.com/Ambibuzz/.github/actions/workflows/review.yml/badge.svg)
+![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)
+![Conventional Commits](https://img.shields.io/badge/commits-conventional-blue?logo=git&logoColor=white)
 
-## Overview
+This repository serves as the central configuration and health repository for **Ambibuzz Technologies LLP**. It mirrors the special `.github` repository pattern supported by GitHub to provide default community health files and configurations for the organization.
+## Table of Contents
 
-[App Name] is a Frappe-based application developed and maintained by **Ambibuzz Technologies LLP**. This app is designed to enhance and extend the capabilities of the Frappe framework, providing seamless integration and functionality.
+- [Purpose](#purpose)
+- [Tools & Configurations](#tools--configurations)
+  - [Python Linting & Formatting (`ruff.toml`)](#1-python-linting--formatting-rufftoml)
+  - [Commit Message Linting (`commitlint.config.js`)](#2-commit-message-linting-commitlintconfigjs)
+  - [Pre-commit Hooks (`.pre-commit-config.yaml`)](#3-pre-commit-hooks-pre-commit-configyaml)
+- [Workflows (GitHub Actions)](#workflows-github-actions)
+- [Setup Instructions](#setup-instructions)
+- [Repository Structure](#repository-structure)
+- [Contact](#contact)
+## Purpose
 
-## Features
+The primary purpose of this repository is to store reusable configurations and workflows that can be inherited or referenced by other repositories within the organization. This ensures consistency in coding standards, commit messages, and CI/CD processes.
 
-- Feature 1
-- Feature 2
-- Feature 3
+## Tools & Configurations
 
-## Installation
+The following tools and configurations are maintained in this repository:
 
-```sh
-# Get the app from GitHub
-bench get-app [App Name] https://github.com/Ambibuzz/[App Name].git
+### 1. Python Linting & Formatting (`ruff.toml`)
 
-# Install the app on your site
-bench --site [your-site] install-app [App Name]
+We use **Ruff** for extremely fast Python linting and formatting.
+
+- **Config File**: [`ruff.toml`](ruff.toml)
+- **Settings**:
+  - Target Python Version: 3.10
+  - Line Length: 110
+  - Indent Style: Tab
+  - Rules: Flake8 (F), pycodestyle (E, W), isort (I), pyupgrade (UP), bugbear (B), and Ruff specific rules (RUF).
+
+### 2. Commit Message Linting (`commitlint.config.js`)
+
+We enforce **Conventional Commits** to ensure a clean and structured commit history.
+
+- **Config File**: [`commitlint.config.js`](commitlint.config.js)
+- **Standard**: Conventional Commits (via `@commitlint/config-conventional`)
+
+### 3. Pre-commit Hooks (`.pre-commit-config.yaml`)
+
+A set of Git hooks to automatically identify and fix issues before code is committed.
+
+- **Config File**: [`.pre-commit-config.yaml`](.pre-commit-config.yaml)
+- **Hooks**:
+  - `trailing-whitespace`
+  - `end-of-file-fixer`
+  - `check-yaml`, `check-json`, `check-toml`
+  - `ruff-check` & `ruff-format` (Python)
+  - `prettier` (JS, CSS, SCSS, etc.)
+  - `commitlint` (Commit messages)
+
+## Setup
+
+To ensure code quality and consistency, please set up the Git hooks locally:
+
+1. **Install `pre-commit`**:
+
+   ```bash
+   pip install pre-commit
+   ```
+
+2. **Install the hooks**:
+   ```bash
+   pre-commit install
+   pre-commit install --hook-type commit-msg
+   ```
+
+## Workflows
+
+GitHub Actions workflows are located in `.github/workflows/` and can be used for checking code quality across repositories.
+
+- **`pylint.yml`**: Runs Pylint checks.
+- **`jslint.yml`**: Runs JavaScript linting.
+- **`review.yml`**: General review workflow.
+
+## Templates
+
+- **Pull Request Template**: Located at `.github/PULL_REQUEST_TEMPLATE.md`, this template is automatically applied to new Pull Requests in the organization to guide contributors in providing necessary context.
+
+- **Repository Structure**:A quick overview of the key files and folders:
+```
+├── .github/
+│   ├── workflows/
+│   │   ├── pylint.yml
+│   │   ├── jslint.yml
+│   │   └── review.yml
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .pre-commit-config.yaml
+├── commitlint.config.js
+├── ruff.toml
+└── README.md
 ```
 
-## Setup & Configuration
+## license
 
-- Ensure you have a Frappe site running.
-- Install dependencies (if any) using `bench setup requirements`.
-- Run `bench migrate` to apply database changes.
-- Configure settings via the app's configuration page in Frappe.
-
-## Development
-
-### Prerequisites
-
-- Frappe Framework v15+
-- Python 3.10+
-- Node.js 18+
-- Redis, MariaDB, and other Frappe dependencies
-
-### Setting Up for Development
-
-```sh
-# Clone the repository
-cd apps
-
-git clone https://github.com/Ambibuzz/[App Name].git
-
-# Install the app
-bench get-app [App Name]
-bench --site [your-site] install-app [App Name]
-```
-
-## Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository on GitHub.
-2. Create a feature branch.
-3. Commit changes with clear commit messages.
-4. Push to your fork and create a pull request.
-
-## License
-
-[App Name] is licensed under the MIT License.
+MIT
 
 ## Maintainers
 
@@ -71,4 +111,3 @@ This application is actively maintained by **Ambibuzz Technologies LLP**. For an
 - GitHub: [Ambibuzz](https://github.com/Ambibuzz)
 - Website: [ambibuzz.com](https://www.ambibuzz.com)
 - Email: [buzz.us@ambibuzz.com](mailto:buzz.us@ambibuzz.com)
-
